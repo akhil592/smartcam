@@ -67,27 +67,27 @@ uint32_t xlnx_kernel_deinit(VVASKernel *handle);
 
 uint32_t xlnx_kernel_deinit(VVASKernel *handle)
 {
-    ResizeKernelPriv *kernel_priv;
-    kernel_priv = (ResizeKernelPriv *)handle->kernel_priv;
-    vvas_free_buffer (handle, kernel_priv->params);
-    free(kernel_priv);
+  //  ResizeKernelPriv *kernel_priv;
+  //  kernel_priv = (ResizeKernelPriv *)handle->kernel_priv;
+  //  vvas_free_buffer (handle, kernel_priv->params);
+  //  free(kernel_priv);
     return 0;
 }
 
 int32_t xlnx_kernel_init(VVASKernel *handle)
 {
     json_t *jconfig = handle->kernel_config;
-    json_t *val; /* kernel config from app */
-    ResizeKernelPriv *kernel_priv;
-    float *pPtr; 
+   // json_t *val; /* kernel config from app */
+    //ResizeKernelPriv *kernel_priv;
+    //float *pPtr; 
 
     handle->is_multiprocess = 0;
-    kernel_priv = (ResizeKernelPriv *)calloc(1, sizeof(ResizeKernelPriv));
+   /* kernel_priv = (ResizeKernelPriv *)calloc(1, sizeof(ResizeKernelPriv));
     if (!kernel_priv) {
         printf("Error: Unable to allocate resize kernel memory\n");
     }
 
-    /* parse config */
+    /* parse config 
     val = json_object_get(jconfig, "mean_r");
     if (!val || !json_is_number(val))
         kernel_priv->mean_r = 0;
@@ -112,7 +112,7 @@ int32_t xlnx_kernel_init(VVASKernel *handle)
     }
     printf("Resize: mean_b=%f\n", kernel_priv->mean_b);
 
-    /* parse config */
+    /* parse config 
     val = json_object_get(jconfig, "scale_r");
     if (!val || !json_is_number(val))
 	kernel_priv->scale_r = 1;
@@ -152,20 +152,20 @@ int32_t xlnx_kernel_init(VVASKernel *handle)
     pPtr[5] = (float)kernel_priv->scale_b;  
 
     handle->kernel_priv = (void *)kernel_priv;
-
+*/
     return 0;
 }
 
 int32_t xlnx_kernel_start(VVASKernel *handle, int start, VVASFrame *input[MAX_NUM_OBJECT], VVASFrame *output[MAX_NUM_OBJECT])
 {
-    ResizeKernelPriv *kernel_priv;
-    kernel_priv = (ResizeKernelPriv *)handle->kernel_priv;
+   // ResizeKernelPriv *kernel_priv;
+  //  kernel_priv = (ResizeKernelPriv *)handle->kernel_priv;
 
     int ret = vvas_kernel_start (handle, "ppppuuuuuu", 
         (input[0]->paddr[0]),
         (input[0]->paddr[1]),
         (output[0]->paddr[0]),
-        (kernel_priv->params->paddr[0]),
+        //(kernel_priv->params->paddr[0]),
         (input[0]->props.width),
         (input[0]->props.height),
         (input[0]->props.stride),
