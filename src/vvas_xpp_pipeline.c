@@ -39,11 +39,11 @@ enum
       str = (char*)"INFO";\
     else if (level == LOG_LEVEL_DEBUG)\
       str = (char*)"DEBUG";\
-    if (level <= kernel_priv->log_level) {\
+    /*if (level <= kernel_priv->log_level) {\
       printf("[%s %s:%d] %s: ",__FILENAME__, __func__, __LINE__, str);\
       printf(__VA_ARGS__);\
       printf("\n");\
-    }\
+    }\*/
   } while (0); \
 }
 
